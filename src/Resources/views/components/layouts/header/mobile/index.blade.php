@@ -8,7 +8,7 @@
     $showWishlist = (bool) core()->getConfigData('customer.settings.wishlist.wishlist_option');
 @endphp
 
-<div class="flex flex-wrap gap-4 px-4 pt-6 pb-4 shadow-sm lg:hidden">
+<div class="flex flex-wrap gap-4 bg-surface-base px-4 pb-4 pt-6 shadow-sm lg:hidden">
     <div class="flex items-center justify-between w-full">
         <!-- Left Navigation -->
         <div class="flex items-center gap-x-1.5">
@@ -90,14 +90,14 @@
 
                                     <a
                                         href="{{ route('shop.customer.session.create') }}"
-                                        class="block py-4 m-0 mx-auto text-base font-medium text-center text-white cursor-pointer w-max rounded-2xl bg-navyBlue px-7 ltr:ml-0 rtl:mr-0"
+                                        class="m-0 mx-auto block w-max cursor-pointer rounded-2xl bg-brand-primary px-7 py-4 text-center text-base font-medium text-white ltr:ml-0 rtl:mr-0"
                                     >
                                             @lang('shop::app.components.layouts.header.mobile.sign-in')
                                         </a>
 
                                     <a
                                         href="{{ route('shop.customers.register.index') }}"
-                                        class="m-0 mx-auto block w-max cursor-pointer rounded-2xl border-2 border-navyBlue bg-white px-7 py-3.5 text-center text-base font-medium text-navyBlue ltr:ml-0 rtl:mr-0"
+                                        class="m-0 mx-auto block w-max cursor-pointer rounded-2xl border-2 border-brand-primary bg-surface-base px-7 py-3.5 text-center text-base font-medium text-brand-primary ltr:ml-0 rtl:mr-0"
                                     >
                                             @lang('shop::app.components.layouts.header.mobile.sign-up')
                                         </a>
@@ -216,7 +216,7 @@
 
             <input
                 type="text"
-                class="block w-full rounded-xl border border-['#E3E3E3'] px-11 py-3.5 text-sm font-medium text-gray-900 max-md:rounded-lg max-md:px-10 max-md:py-3 max-md:font-normal max-sm:text-xs"
+                class="block w-full rounded-xl border border-brand-primary/20 bg-surface-base px-11 py-3.5 text-sm font-medium text-content-primary transition-colors focus:border-brand-primary max-md:rounded-lg max-md:px-10 max-md:py-3 max-md:font-normal max-sm:text-xs"
                 name="query"
                 value="{{ request('query') }}"
                 placeholder="@lang('shop::app.components.layouts.header.mobile.search-text')"
@@ -302,7 +302,7 @@
                 <x-slot:footer>
                     <!-- Localization & Currency Section -->
                 @if(core()->getCurrentChannel()->locales()->count() > 1 || core()->getCurrentChannel()->currencies()->count() > 1 )
-                                    <div class="fixed bottom-0 z-10 grid w-full max-w-full grid-cols-[1fr_auto_1fr] items-center justify-items-center border-t border-zinc-200 bg-white px-5 ltr:left-0 rtl:right-0">
+                                    <div class="fixed bottom-0 z-10 grid w-full max-w-full grid-cols-[1fr_auto_1fr] items-center justify-items-center border-t border-brand-primary/15 bg-surface-base px-5 ltr:left-0 rtl:right-0">
                                         <!-- Filter Drawer -->
                                         <x-shop::drawer
                                             position="bottom"
