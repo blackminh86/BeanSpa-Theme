@@ -7,6 +7,11 @@ import.meta.glob(["../images/**", "../fonts/**"]);
  * Main vue bundler.
  */
 import { createApp } from "vue/dist/vue.esm-bundler";
+import Swiper from "swiper";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 /**
  * Main root application registry.
@@ -18,6 +23,7 @@ window.app = createApp({
 
     mounted() {
         this.lazyImages();
+        this.initBeanspaSliders();
     },
 
     methods: {
@@ -135,6 +141,32 @@ window.app = createApp({
 
             lazyImages.forEach(function(lazyImage) {
                 lazyImageObserver.observe(lazyImage);
+            });
+        },
+
+        initBeanspaSliders() {
+            document.querySelectorAll('.beanspa-swiper').forEach((slider) => {
+                if (slider.swiper) {
+                    return;
+                }
+
+                new Swiper(slider, {
+                    modules: [Navigation, Pagination, Autoplay],
+                    loop: true,
+                    speed: 700,
+                    autoplay: {
+                        delay: 5500,
+                        disableOnInteraction: false,
+                    },
+                    navigation: {
+                        prevEl: slider.querySelector('[data-swiper-prev]'),
+                        nextEl: slider.querySelector('[data-swiper-next]'),
+                    },
+                    pagination: {
+                        el: slider.querySelector('[data-swiper-pagination]'),
+                        clickable: true,
+                    },
+                });
             });
         },
     },

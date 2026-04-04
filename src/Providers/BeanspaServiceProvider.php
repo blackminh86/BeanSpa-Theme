@@ -23,6 +23,8 @@ class BeanspaServiceProvider extends ServiceProvider
     {
         $this->loadViewsFrom(__DIR__.'/../Resources/views', 'beanspa');
 
+        $this->loadTranslationsFrom(__DIR__.'/../Resources/lang', 'shop');
+
         Route::middleware('web')->group(__DIR__.'/../Routes/web.php');
 
         $this->publishes([

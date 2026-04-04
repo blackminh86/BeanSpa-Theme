@@ -2,7 +2,7 @@
 
 <v-topbar>
     <!-- Shimmer Effect -->
-    <div class="flex items-center justify-between border border-b border-l-0 border-r-0 border-t-0 border-brand-primary/15 bg-surface-base px-16 text-content-primary">
+    <div class="flex items-center justify-between bg-surface-base px-16 text-content-primary">
         <!-- Currencies -->
         <div class="flex w-20 items-center justify-between gap-2.5 py-3">
             <div
@@ -55,7 +55,7 @@
         type="text/x-template"
         id="v-topbar-template"
     >
-        <div class="flex w-full items-center justify-between border border-b border-l-0 border-r-0 border-t-0 border-brand-primary/15 bg-surface-base px-16 text-content-primary">
+        <div class="flex w-full items-center justify-between bg-surface-base px-16 text-content-primary">
             {!! view_render_event('bagisto.shop.components.layouts.header.desktop.top.currency_switcher.before') !!}
 
             <!-- Currency Switcher -->

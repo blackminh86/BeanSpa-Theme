@@ -1,16 +1,23 @@
 {!! view_render_event('bagisto.shop.layout.header.before') !!}
 
+@php($isHomePage = request()->routeIs('shop.home.index'))
+
 @if(core()->getCurrentChannel()->locales()->count() > 1 || core()->getCurrentChannel()->currencies()->count() > 1 )
     <div class="max-lg:hidden">
         <x-shop::layouts.header.desktop.top />
     </div>
 @endif
 
-<header class="shadow-gray sticky top-0 z-10 bg-surface-base shadow-sm max-lg:shadow-none">
+<header @class([
+    'shadow-gray sticky top-0 z-10 max-lg:shadow-none',
+    'bg-white' => $isHomePage,
+    'bg-surface-base' => ! $isHomePage,
+    'shadow-sm' => ! $isHomePage,
+])>
     <v-header-switcher>
         <!-- Desktop Header Shimmer -->
         <div class="flex flex-wrap max-lg:hidden">
-            <div class="flex min-h-[92px] w-full justify-between border border-b border-l-0 border-r-0 border-t-0 bg-white px-[60px] max-1180:px-8">
+            <div class="flex min-h-[92px] w-full justify-between bg-white px-[60px] max-1180:px-8">
                 <!-- Left Navigation Section -->
                 <div class="flex items-center gap-x-10 max-[1180px]:gap-x-5">
                     <!-- Logo Shimmer -->

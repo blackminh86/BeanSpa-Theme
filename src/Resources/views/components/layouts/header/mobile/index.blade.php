@@ -8,8 +8,9 @@
     $showWishlist = (bool) core()->getConfigData('customer.settings.wishlist.wishlist_option');
 @endphp
 
-<div class="flex flex-wrap gap-4 bg-surface-base px-4 pb-4 pt-6 shadow-sm lg:hidden">
-    <div class="flex items-center justify-between w-full">
+<div class="lg:hidden">
+    <div class="bg-surface-base px-4 pb-4 pt-6 shadow-[0_6px_14px_rgba(27,96,96,0.12)]">
+        <div class="flex w-full items-center justify-between">
         <!-- Left Navigation -->
         <div class="flex items-center gap-x-1.5">
             {!! view_render_event('bagisto.shop.components.layouts.header.mobile.drawer.before') !!}
@@ -23,14 +24,12 @@
 
             <a
                 href="{{ route('shop.home.index') }}"
-                class="max-h-[30px]"
                 aria-label="@lang('shop::app.components.layouts.header.mobile.bagisto')"
             >
                 <img
                     src="{{ core()->getCurrentChannel()->logo_url ?? bagisto_asset('images/logo.svg') }}"
                     alt="{{ config('app.name') }}"
-                    width="131"
-                    height="29"
+                    class="h-8 w-auto sm:h-9"
                 >
             </a>
 
@@ -198,38 +197,41 @@
                 </div>
             </div>
         </div>
+        </div>
     </div>
 
-    {!! view_render_event('bagisto.shop.components.layouts.header.mobile.search.before') !!}
+    <div class="bg-white px-4 pb-4 pt-3">
+        {!! view_render_event('bagisto.shop.components.layouts.header.mobile.search.before') !!}
 
-    <!-- Serach Catalog Form -->
-    <form action="{{ route('shop.search.index') }}" class="flex items-center w-full">
-        <label
-            for="organic-search"
-            class="sr-only"
-        >
-            @lang('shop::app.components.layouts.header.mobile.search')
-        </label>
-
-        <div class="relative w-full">
-            <div class="icon-search pointer-events-none absolute top-3 flex items-center text-2xl max-md:text-xl max-sm:top-2.5 ltr:left-3 rtl:right-3"></div>
-
-            <input
-                type="text"
-                class="block w-full rounded-xl border border-brand-primary/20 bg-surface-base px-11 py-3.5 text-sm font-medium text-content-primary transition-colors focus:border-brand-primary max-md:rounded-lg max-md:px-10 max-md:py-3 max-md:font-normal max-sm:text-xs"
-                name="query"
-                value="{{ request('query') }}"
-                placeholder="@lang('shop::app.components.layouts.header.mobile.search-text')"
-                required
+        <!-- Serach Catalog Form -->
+        <form action="{{ route('shop.search.index') }}" class="flex w-full items-center">
+            <label
+                for="organic-search"
+                class="sr-only"
             >
+                @lang('shop::app.components.layouts.header.mobile.search')
+            </label>
 
-            @if (core()->getConfigData('catalog.products.settings.image_search'))
-                @include('shop::search.images.index')
-            @endif
-        </div>
-    </form>
+            <div class="relative w-full">
+                <div class="icon-search pointer-events-none absolute top-3 flex items-center text-2xl max-md:text-xl max-sm:top-2.5 ltr:left-3 rtl:right-3"></div>
 
-    {!! view_render_event('bagisto.shop.components.layouts.header.mobile.search.after') !!}
+                <input
+                    type="text"
+                    class="block w-full rounded-xl border border-brand-primary/20 bg-white px-11 py-3.5 text-sm font-medium text-content-primary transition-colors focus:border-brand-primary max-md:rounded-lg max-md:px-10 max-md:py-3 max-md:font-normal max-sm:text-xs"
+                    name="query"
+                    value="{{ request('query') }}"
+                    placeholder="@lang('shop::app.components.layouts.header.mobile.search-text')"
+                    required
+                >
+
+                @if (core()->getConfigData('catalog.products.settings.image_search'))
+                    @include('shop::search.images.index')
+                @endif
+            </div>
+        </form>
+
+        {!! view_render_event('bagisto.shop.components.layouts.header.mobile.search.after') !!}
+    </div>
 </div>
 
 @pushOnce('scripts')
@@ -243,7 +245,7 @@
                     <span class="text-2xl cursor-pointer icon-hamburger"></span>
                 </x-slot>
 
-                <x-slot:header>
+                <x-slot:header class="border-b border-brand-primary/10 bg-surface-base">
                     <div class="flex items-center justify-between">
                         <a href="{{ route('shop.home.index') }}">
                             <img
