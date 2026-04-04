@@ -1,0 +1,26 @@
+{
+    "name": "khangweb/beanspa",
+    "license": "MIT",
+    "description": "Beanspa shop theme package for Bagisto",
+    "authors": [
+        {
+            "name": "KhangWeb",
+            "email": "support@khangweb.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "KhangWeb\\Beanspa\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "KhangWeb\\Beanspa\\Providers\\BeanspaServiceProvider"
+            ],
+            "aliases": {}
+        }
+    },
+    "minimum-stability": "dev"
+}
