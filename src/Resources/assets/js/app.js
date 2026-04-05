@@ -25,6 +25,7 @@ window.app = createApp({
         this.lazyImages();
         this.initBeanspaSliders();
         this.initBeanspaPolicySliders();
+        this.initAboutSectionMotion();
         this.initScrollReveal();
     },
 
@@ -207,6 +208,29 @@ window.app = createApp({
                     },
                 });
             });
+        },
+
+        initAboutSectionMotion() {
+            const aboutBlocks = document.querySelectorAll('.beanspa-about-motion');
+
+            if (! aboutBlocks.length) {
+                return;
+            }
+
+            const observer = new IntersectionObserver((entries, revealObserver) => {
+                entries.forEach((entry) => {
+                    if (! entry.isIntersecting) {
+                        return;
+                    }
+
+                    entry.target.classList.add('is-visible');
+                    revealObserver.unobserve(entry.target);
+                });
+            }, {
+                threshold: 0.3,
+            });
+
+            aboutBlocks.forEach((item) => observer.observe(item));
         },
 
         initScrollReveal() {

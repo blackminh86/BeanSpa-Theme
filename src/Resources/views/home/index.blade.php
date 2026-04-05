@@ -51,6 +51,7 @@
     </x-slot>
 
     @php($policySectionRendered = false)
+    @php($aboutSectionRendered = false)
 
     @foreach ($customizations as $customization)
         @php($data = $customization->options)

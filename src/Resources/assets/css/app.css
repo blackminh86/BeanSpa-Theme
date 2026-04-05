@@ -120,6 +120,380 @@ img.lazy {
     filter: brightness(0) invert(1);
 }
 
+.section_about {
+    position: relative;
+    overflow: hidden;
+    padding: 1rem 0 2.75rem;
+    background-color: #ffffff;
+}
+
+.section_about .container {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+}
+
+.section_about .box_about_index {
+    position: relative;
+    width: 100%;
+    background-color: #f6f3ed;
+    background-image: url("../images/about/bg-about-index.png");
+    background-repeat: no-repeat;
+    background-position: right top;
+    background-size: 100% auto;
+    border-radius: 1.5rem;
+    padding: 2.5rem;
+    overflow: hidden;
+}
+
+.section_about .row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -0.75rem;
+    align-items: stretch;
+}
+
+.section_about .col-12 {
+    flex: 0 0 100%;
+    padding: 0 0.75rem;
+}
+
+.section_about .col-lg-6 {
+    flex: 0 0 50%;
+    padding: 0 0.75rem;
+}
+
+.section_about .box_img_box10 {
+    position: relative;
+    display: flex;
+}
+
+.section_about .img-box10 {
+    position: relative;
+    --about-image: url('/themes/beanspa/images/about/section-about-1.jpg');
+    display: grid;
+    grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+    gap: 1.75rem;
+    align-items: stretch;
+    width: 100%;
+    height: 100%;
+}
+
+.section_about .about-crop-frame {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 8px 26px rgba(25, 20, 16, 0.1);
+}
+
+.section_about .about-crop-frame::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: var(--about-image);
+    background-repeat: no-repeat;
+    background-color: #d9c4af;
+}
+
+.section_about .about-crop-frame--wide {
+    min-height: 24rem;
+}
+
+.section_about .about-crop-frame--wide::before {
+    background-size: cover;
+    background-position: left center;
+}
+
+.section_about .about-crop-frame--zoom {
+}
+
+.section_about .about-crop-frame--zoom::before {
+    background-size: cover;
+    background-position: right center;
+}
+
+.section_about .btn_contact-phone {
+    position: absolute;
+    left: 1rem;
+    bottom: 1rem;
+    z-index: 10;
+}
+
+.section_about .phone_about {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: #f0a793;
+    padding: 0.625rem 1rem 0.625rem 0.625rem;
+    border-radius: 1rem;
+    border: 5px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 8px 24px rgba(123, 65, 44, 0.2);
+}
+
+.section_about .icon_phone {
+    display: inline-flex;
+    width: 2.8rem;
+    height: 2.8rem;
+    min-width: 2.8rem;
+    border-radius: 9999px;
+    background: #1b6060;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    animation: beanspa-phone-ring 1.35s infinite ease-in-out;
+}
+
+.section_about .icon_phone svg {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+.section_about .box-contact-phone-info {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+    color: #fff;
+}
+
+.section_about .box-contact-phone-info span {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.section_about .box-contact-phone-info a {
+    color: #fff;
+    font-size: 1.7rem;
+    font-weight: 700;
+    text-decoration: none;
+    line-height: 1;
+}
+
+.section_about .pbmit-sticky-corner {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.section_about .pbmit-bottom-left-corner {
+    left: 0;
+    bottom: 0;
+}
+
+.section_about .pbmit-top-right-corner {
+    right: 0;
+    top: 0;
+}
+
+.section_about .pbmit-sticky-corner svg {
+    width: 100%;
+    height: 100%;
+    opacity: 0.1;
+}
+
+.section_about .col-left {
+    display: flex;
+    align-items: stretch;
+}
+
+.section_about .product-content {
+    padding: 0 1.5rem;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.section_about .section-title-about {
+    margin-bottom: 1rem;
+}
+
+.section_about .sub_title {
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #7a7a7a;
+    margin-bottom: 0.5rem;
+}
+
+.section_about .section-title-about h2 {
+    margin: 0;
+    color: #1c1615;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.section_about .section-title-about h2 b {
+    color: #f0a793;
+}
+
+.section_about .desc {
+    margin-top: 1rem;
+    color: #3f3632;
+    font-size: 0.95rem;
+    line-height: 1.7;
+}
+
+.section_about .box_thong_so {
+    list-style: none;
+    margin: 1.5rem 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.section_about .box_thong_so li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #1f1814;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.section_about .box_thong_so li:hover .icon-box {
+    background: #f3aa98;
+    border-color: #f3aa98;
+}
+
+.section_about .box_thong_so li:hover .img_box_cus {
+    transform: rotateY(360deg);
+}
+
+.section_about .box_thong_so li:hover .img_box_cus img {
+    filter: brightness(0) invert(1);
+}
+
+.section_about .box_thong_so .icon-box {
+    flex-shrink: 0;
+    width: 2.88rem;
+    height: 2.88rem;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 1.5px solid #d6cec5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.35s ease, border-color 0.35s ease;
+}
+
+.section_about .img_box_cus {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.6s ease;
+}
+
+.section_about .img_box_cus img {
+    width: 1.68rem;
+    height: 1.68rem;
+    object-fit: contain;
+    filter: none;
+    transition: filter 0.3s ease;
+}
+
+.section_about .img_box_cus img {
+    width: 1.4rem;
+    height: 1.4rem;
+    object-fit: contain;
+    filter: none;
+    transition: filter 0.3s ease;
+}
+
+.section_about .box-contact {
+    margin-top: 1.75rem;
+    display: flex;
+    justify-content: center;
+}
+
+.section_about .theme-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.65rem 1.2rem;
+    background: #1b6060;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 9999px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.section_about .btn-wrap {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.section_about .text-one,
+.section_about .text-two {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.section_about .pbmit-svg-arrow {
+    width: 1rem;
+    height: 1rem;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+@keyframes beanspa-phone-ring {
+    0%, 100% {
+        transform: rotate(0deg);
+    }
+
+    10% {
+        transform: rotate(-11deg);
+    }
+
+    20% {
+        transform: rotate(11deg);
+    }
+
+    30% {
+        transform: rotate(-9deg);
+    }
+
+    40% {
+        transform: rotate(9deg);
+    }
+
+    50% {
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes beanspa-icon-spin {
+    0% {
+        transform: rotateY(0deg);
+    }
+
+    100% {
+        transform: rotateY(360deg);
+    }
+}
+
 .section_policy .policy-swiper .content {
     flex: 1;
     min-width: 0;
@@ -144,6 +518,19 @@ img.lazy {
 }
 
 @media (max-width: 1199px) {
+    .section_about .about-card {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1.4rem;
+    }
+
+    .section_about .about-media {
+        min-height: 19rem;
+    }
+
+    .section_about .about-phone-text a {
+        font-size: 1.45rem;
+    }
+
     .section_policy {
         padding: 2.25rem 0 2.75rem;
         background-size: 240px auto;
@@ -165,6 +552,128 @@ img.lazy {
 }
 
 @media (max-width: 767px) {
+    .section_about {
+        padding: 1.5rem 0 2.25rem;
+    }
+
+    .section_about .container {
+        width: 100%;
+        max-width: 100%;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+
+    .section_about .row {
+        display: block;
+        margin: 0 -0.75rem;
+        row-gap: 1.25rem;
+    }
+
+    .section_about .col-12,
+    .section_about .col-lg-6,
+    .section_about .col-md-12 {
+        display: block;
+        width: 100%;
+        flex: 0 0 100%;
+        max-width: 100%;
+        padding: 0 0.75rem;
+    }
+
+    .section_about .col-left {
+        margin-top: 1.25rem;
+    }
+
+    .section_about .product-content {
+        padding: 0;
+    }
+
+    .section_about .box_about_index {
+        width: 100%;
+        max-width: none;
+        padding: 1rem;
+        background-size: 150% auto;
+    }
+
+    .section_about .img-box10 {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 0.78fr);
+        gap: 0.875rem;
+    }
+
+    .section_about .about-crop-frame--wide {
+        min-height: 16.5rem;
+    }
+
+    .section_about .about-crop-frame--zoom {
+        min-height: 14.5rem;
+        margin-top: 0;
+    }
+
+    .section_about .about-card {
+        border-radius: 0.95rem;
+        padding: 0.875rem;
+        gap: 1.2rem;
+    }
+
+    .section_about .about-media {
+        min-height: 16.5rem;
+        grid-template-columns: 1fr 0.62fr;
+        gap: 0.625rem;
+    }
+
+    .section_about .about-phone-badge {
+        left: 0.625rem;
+        bottom: 0.625rem;
+        padding: 0.45rem 0.75rem 0.45rem 0.45rem;
+        gap: 0.45rem;
+    }
+
+    .section_about .about-phone-icon {
+        width: 2.35rem;
+        height: 2.35rem;
+    }
+
+    .section_about .about-phone-icon .icon-phone {
+        font-size: 0.95rem;
+    }
+
+    .section_about .about-phone-text span {
+        font-size: 0.75rem;
+    }
+
+    .section_about .about-phone-text a {
+        font-size: 1.15rem;
+    }
+
+    .section_about .about-content h2 {
+        font-size: 1.85rem;
+    }
+
+    .section_about .about-content p {
+        font-size: 0.9rem;
+        line-height: 1.65;
+    }
+
+    .section_about .about-features {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0.7rem;
+        margin-top: 1.1rem;
+    }
+
+    .section_about .about-feature-icon {
+        width: 2.4rem;
+        height: 2.4rem;
+    }
+
+    .section_about .about-feature-icon img {
+        width: 1.35rem;
+        height: 1.35rem;
+    }
+
+    .section_about .about-cta {
+        margin-top: 1.25rem;
+        padding: 0.62rem 1rem;
+    }
+
     .section_policy {
         padding: 1.5rem 0 2rem;
         background-size: 140px auto;
