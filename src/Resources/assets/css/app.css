@@ -2,6 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── Custom Scrollbar ── */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #fce8e4; /* hồng nhạt */
+}
+
+::-webkit-scrollbar-thumb {
+    background: #1B6060;
+    border-radius: 9999px;
+    border: 2px solid #fce8e4;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #134848;
+}
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #1B6060 #fce8e4;
+}
+
 @font-face {
     font-family: "bagisto-shop";
     src: url("../fonts/bagisto-shop.woff") format("woff");
@@ -12,6 +37,167 @@
 
 img.lazy {
   visibility: hidden;
+}
+
+.beanspa-reveal-left {
+    opacity: 0;
+    transform: translate3d(32px, 0, 0);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.beanspa-reveal-left.is-visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+}
+
+.section_policy {
+    position: relative;
+    overflow: hidden;
+    padding: 3rem 0 3.5rem;
+    background-color: #ffffff;
+    background-image: url("../images/policy/bg-chinh-sach.png");
+    background-repeat: no-repeat;
+    background-position: left top;
+    background-size: 150px auto;
+}
+
+.section_policy .policy-shell {
+    width: 100%;
+    padding: 0 1.5rem;
+}
+
+.section_policy .policy-swiper {
+    overflow: hidden;
+    padding: 0.5rem 0;
+}
+
+.section_policy .policy-swiper .swiper-slide {
+    height: auto;
+}
+
+.section_policy .policy-swiper .features__item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
+    height: 100%;
+}
+
+.section_policy .policy-swiper .features__item .icon-box {
+    flex-shrink: 0;
+    display: flex;
+    width: 6.5rem;
+    height: 6.5rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 58% 42% 55% 45% / 46% 58% 42% 54%;
+    background: #f1eee8;
+    transition: background-color 0.35s ease, border-radius 0.35s ease;
+}
+
+.section_policy .policy-swiper .features__item .icon-box .img_box_cus {
+    transition: transform 0.6s ease;
+}
+
+.section_policy .policy-swiper .features__item .icon-box .img_box_cus img {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    filter: none;
+    transition: filter 0.3s ease;
+}
+
+.section_policy .policy-swiper .features__item:hover .icon-box {
+    background: #f3aa98;
+    border-radius: 54% 46% 48% 52% / 52% 42% 58% 48%;
+}
+
+.section_policy .policy-swiper .features__item:hover .icon-box .img_box_cus {
+    transform: translate(0%, 0%) rotateY(360deg);
+}
+
+.section_policy .policy-swiper .features__item:hover .icon-box .img_box_cus img {
+    filter: brightness(0) invert(1);
+}
+
+.section_policy .policy-swiper .content {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.section_policy .policy-swiper .features-title {
+    margin: 0;
+    color: #1c1615;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.section_policy .policy-swiper .features-details {
+    margin-top: 0.25rem;
+    color: rgba(28, 22, 21, 0.8);
+    font-size: 0.8125rem;
+    line-height: 1.5;
+}
+
+@media (max-width: 1199px) {
+    .section_policy {
+        padding: 2.25rem 0 2.75rem;
+        background-size: 240px auto;
+        background-position: left 24px center;
+    }
+
+    .section_policy .policy-swiper .features__item .icon-box {
+        width: 5.5rem;
+        height: 5.5rem;
+    }
+
+    .section_policy .policy-swiper .features-title {
+        font-size: 0.875rem;
+    }
+
+    .section_policy .policy-swiper .features-details {
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .section_policy {
+        padding: 1.5rem 0 2rem;
+        background-size: 140px auto;
+        background-position: left top;
+    }
+
+    .section_policy .policy-shell {
+        padding: 0 1rem;
+    }
+
+    .section_policy .policy-swiper .features__item {
+        gap: 0.625rem;
+        padding: 0.5rem 0.75rem;
+    }
+
+    .section_policy .policy-swiper .features__item .icon-box {
+        width: 4.25rem;
+        height: 4.25rem;
+    }
+
+    .section_policy .policy-swiper .features__item .icon-box .img_box_cus img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .section_policy .policy-swiper .features-title {
+        font-size: 0.8125rem;
+    }
+
+    .section_policy .policy-swiper .features-details {
+        font-size: 0.6875rem;
+        line-height: 1.5;
+    }
 }
 
 @layer components {

@@ -24,6 +24,8 @@ window.app = createApp({
     mounted() {
         this.lazyImages();
         this.initBeanspaSliders();
+        this.initBeanspaPolicySliders();
+        this.initScrollReveal();
     },
 
     methods: {
@@ -168,6 +170,66 @@ window.app = createApp({
                     },
                 });
             });
+        },
+
+        initBeanspaPolicySliders() {
+            document.querySelectorAll('.policy-swiper, .beanspa-policy-swiper').forEach((slider) => {
+                if (slider.swiper) {
+                    return;
+                }
+
+                new Swiper(slider, {
+                    speed: 1000,
+                    slidesPerView: 3,
+                    spaceBetween: 20,
+                    grabCursor: true,
+                    breakpoints: {
+                        300: {
+                            slidesPerView: 1.2,
+                            spaceBetween: 14,
+                        },
+                        500: {
+                            slidesPerView: 1.3,
+                            spaceBetween: 14,
+                        },
+                        767: {
+                            slidesPerView: 1.4,
+                            spaceBetween: 20,
+                        },
+                        992: {
+                            slidesPerView: 2,
+                            spaceBetween: 20,
+                        },
+                        1199: {
+                            slidesPerView: 3,
+                            spaceBetween: 20,
+                        },
+                    },
+                });
+            });
+        },
+
+        initScrollReveal() {
+            const revealItems = document.querySelectorAll('.beanspa-reveal-left');
+
+            if (! revealItems.length) {
+                return;
+            }
+
+            const observer = new IntersectionObserver((entries, revealObserver) => {
+                entries.forEach((entry) => {
+                    if (! entry.isIntersecting) {
+                        return;
+                    }
+
+                    entry.target.classList.add('is-visible');
+                    revealObserver.unobserve(entry.target);
+                });
+            }, {
+                threshold: 0.2,
+            });
+
+            revealItems.forEach((item) => observer.observe(item));
         },
     },
 });

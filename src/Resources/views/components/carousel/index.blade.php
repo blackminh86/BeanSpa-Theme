@@ -1,339 +1,93 @@
 @props(['options'])
 
-<v-carousel :images="{{ json_encode($options['images'] ?? []) }}">
-    <div class="overflow-hidden">
-        <div class="shimmer aspect-[2.743/1] max-h-screen w-screen"></div>
-    </div>
-</v-carousel>
+@php
+    $images = collect($options['images'] ?? [])->filter(fn ($image) => ! empty($image['image']))->values();
 
-@pushOnce('scripts')
-    <script
-        type="text/x-template"
-        id="v-carousel-template"
-    >
-        <div class="relative m-auto flex w-full overflow-hidden">
-            <!-- Slider -->
-            <div
-                class="inline-flex translate-x-0 cursor-pointer transition-transform duration-700 ease-out will-change-transform"
-                ref="sliderContainer"
-            >
-                <div
-                    class="max-h-screen w-screen bg-cover bg-no-repeat"
-                    v-for="(image, index) in images"
-                    :key="index"
-                    @click="visitLink(image)"
-                    ref="slide"
-                >
-                    <x-shop::media.images.lazy
-                        class="aspect-[2.743/1] max-h-full w-full max-w-full select-none transition-transform duration-300 ease-in-out will-change-transform"
-                        ::lazy="index === 0 ? false : true"
-                        ::src="image.image"
-                        ::srcset="image.image + ' 1920w, ' + image.image.replace('storage', 'cache/large') + ' 1280w,' + image.image.replace('storage', 'cache/medium') + ' 1024w, ' + image.image.replace('storage', 'cache/small') + ' 525w'"
-                        ::sizes="
-                            '(max-width: 525px) 525px, ' +
-                            '(max-width: 1024px) 1024px, ' +
-                            '(max-width: 1600px) 1280px, ' +
-                            '1920px'
-                        "
-                        ::alt="image?.title || 'Carousel Image ' + (index + 1)"
-                        tabindex="0"
-                        ::fetchpriority="index === 0 ? 'high' : 'low'"
-                        ::decoding="index === 0 ? 'sync' : 'async'"
-                    />
+    $defaultSlides = [
+        [
+            'badge'    => 'Chăm Sóc Sắc Đẹp Toàn Diện',
+            'title'    => 'Nâng Niu Vẻ Đẹp Của Bạn',
+            'cta'      => 'Xem thêm',
+            'gradient' => 'bg-[linear-gradient(90deg,rgba(30,18,14,0.72)_0%,rgba(30,18,14,0.28)_45%,rgba(30,18,14,0.08)_100%)]',
+        ],
+        [
+            'badge'    => 'Sản Phẩm Thuần Tự Nhiên',
+            'title'    => 'Thư Giãn & Tái Tạo Năng Lượng',
+            'cta'      => 'Khám phá ngay',
+            'gradient' => 'bg-[linear-gradient(90deg,rgba(20,40,35,0.70)_0%,rgba(20,40,35,0.25)_50%,rgba(20,40,35,0.05)_100%)]',
+        ],
+    ];
+@endphp
+
+@if ($images->isNotEmpty())
+    <section class="bg-white px-0 pb-8 pt-0 lg:pb-10 lg:pt-0">
+        <div class="mx-auto w-full px-5">
+            <div class="beanspa-swiper swiper relative w-full overflow-hidden rounded-[32px] bg-[#2d1c17] shadow-[0_14px_40px_rgba(48,28,18,0.15)] aspect-[3/2] sm:aspect-[16/9] lg:aspect-[21/9]">
+                <div class="swiper-wrapper h-full">
+                    @foreach ($images as $index => $image)
+                        @php
+                            $slide = $defaultSlides[$index % count($defaultSlides)];
+                            $title = $image['title'] ?? $slide['title'];
+                            $link = $image['link'] ?? route('shop.search.index');
+                        @endphp
+
+                        <div class="swiper-slide relative h-full">
+                            <img
+                                src="{{ $image['image'] }}"
+                                alt="{{ $title }}"
+                                class="absolute inset-0 h-full w-full object-cover"
+                            >
+
+                            <div class="pointer-events-none absolute inset-0 z-10 {{ $slide['gradient'] }}"></div>
+
+                            <div class="absolute inset-0 z-20 flex items-center py-6 pl-10 pr-5 sm:py-10 sm:pl-16 sm:pr-10 lg:pl-24 lg:pr-20">
+                                <div class="max-w-[520px] text-white">
+                                    <span class="inline-flex rounded-full border border-white/70 px-3 py-1.5 text-xs font-medium sm:px-7 sm:py-2.5 sm:text-[15px]">
+                                        {{ $slide['badge'] }}
+                                    </span>
+
+                                    <h2 class="mt-2 font-heading text-[28px] font-semibold leading-[1.05] sm:mt-4 sm:text-[48px] lg:text-[56px] lg:leading-[1.06]">
+                                        {{ $title }}
+                                    </h2>
+
+                                    <div class="mt-3 flex flex-wrap gap-3 sm:mt-6 sm:gap-4">
+                                        <a
+                                            href="{{ $link }}"
+                                            class="inline-flex items-center gap-2 rounded-full bg-brand-primary px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-primary/90 sm:px-8 sm:py-3.5 sm:text-lg"
+                                        >
+                                            {{ $slide['cta'] }}
+
+                                            <span class="icon-arrow-right text-base sm:text-xl"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
-            </div>
 
-            <!-- Navigation -->
-            <span
-                class="icon-arrow-left absolute left-2.5 top-1/2 -mt-[22px] hidden w-auto rounded-full bg-black/80 p-3 text-2xl font-bold text-white opacity-30 transition-all md:inline-block"
-                :class="{
-                    'cursor-not-allowed': direction == 'ltr' && currentIndex == 0,
-                    'cursor-pointer hover:opacity-100': direction == 'ltr' ? currentIndex > 0 : currentIndex <= 0
-                }"
-                role="button"
-                aria-label="@lang('shop::components.carousel.previous')"
-                tabindex="0"
-                v-if="images?.length >= 2"
-                @click="navigate('prev')"
-            >
-            </span>
+                @if ($images->count() > 1)
+                    <button
+                        type="button"
+                        class="absolute left-5 top-1/2 z-30 hidden h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full bg-brand-primary/70 text-white transition hover:bg-brand-primary lg:flex"
+                        aria-label="Slider trước"
+                        data-swiper-prev
+                    >
+                        <span class="icon-arrow-left text-2xl"></span>
+                    </button>
 
-            <span
-                class="icon-arrow-right absolute right-2.5 top-1/2 -mt-[22px] hidden w-auto rounded-full bg-black/80 p-3 text-2xl font-bold text-white opacity-30 transition-all md:inline-block"
-                :class="{
-                    'cursor-not-allowed': direction == 'rtl' && currentIndex == 0,
-                    'cursor-pointer hover:opacity-100': direction == 'rtl' ? currentIndex < 0 : currentIndex >= 0
-                }"
-                role="button"
-                aria-label="@lang('shop::components.carousel.next')"
-                tabindex="0"
-                v-if="images?.length >= 2"
-                @click="navigate('next')"
-            >
-            </span>
+                    <button
+                        type="button"
+                        class="absolute right-5 top-1/2 z-30 hidden h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full bg-brand-primary/70 text-white transition hover:bg-brand-primary lg:flex"
+                        aria-label="Slider tiếp theo"
+                        data-swiper-next
+                    >
+                        <span class="icon-arrow-right text-2xl"></span>
+                    </button>
 
-            <!-- Pagination -->
-            <div class="absolute bottom-5 left-0 flex w-full justify-center max-md:bottom-3.5 max-sm:bottom-2.5">
-                <div
-                    v-for="(image, index) in images"
-                    :key="index"
-                    class="sm:p-2.5 mx-1 h-3 w-3 cursor-pointer rounded-full max-md:h-2 max-md:w-2 max-sm:h-1.5 max-sm:w-1.5
-                    p-2 focus:outline-none"
-                    :class="{ 'bg-navyBlue': index === Math.abs(currentIndex), 'opacity-30 bg-gray-500': index !== Math.abs(currentIndex) }"
-                    role="button"
-                    tabindex="0"
-                    :aria-label="'Go to slide ' + (index + 1)"
-                    @click="navigateByPagination(index)"
-                    @keydown.enter="navigateByPagination(index)"
-                    @keydown.space.prevent="navigateByPagination(index)"
-                >
-                </div>
+                    <div class="absolute bottom-4 left-1/2 z-30 hidden -translate-x-1/2 lg:flex" data-swiper-pagination></div>
+                @endif
             </div>
         </div>
-    </script>
-
-    <script type="module">
-        app.component("v-carousel", {
-            template: '#v-carousel-template',
-
-            props: ['images'],
-
-            data() {
-                return {
-                    isDragging: false,
-                    startPos: 0,
-                    currentTranslate: 0,
-                    prevTranslate: 0,
-                    animationID: 0,
-                    currentIndex: 0,
-                    slider: '',
-                    slides: [],
-                    autoPlayInterval: null,
-                    direction: 'ltr',
-                    startFrom: 1,
-                };
-            },
-
-            mounted() {
-                this.slider = this.$refs.sliderContainer;
-
-                if (
-                    this.$refs.slide
-                    && typeof this.$refs.slide[Symbol.iterator] === 'function'
-                ) {
-                    this.slides = Array.from(this.$refs.slide);
-                }
-
-                // Use requestIdleCallback for non-critical initialization
-                if ('requestIdleCallback' in window) {
-                    requestIdleCallback(() => {
-                        this.init();
-                        setTimeout(() => {
-                            this.play();
-                        }, 4000);
-                    });
-                } else {
-                    setTimeout(() => {
-                        this.init();
-                        setTimeout(() => {
-                            this.play();
-                        }, 4000);
-                    });
-                }
-            },
-
-            beforeUnmount() {
-                this.cleanup();
-            },
-
-            methods: {
-                init() {
-                    this.direction = document.dir;
-
-                    if (this.direction == 'rtl') {
-                        this.startFrom = -1;
-                    }
-
-                    this.slides.forEach((slide, index) => {
-                        slide.querySelector('img')?.addEventListener('dragstart', (e) => e.preventDefault());
-
-                        slide.addEventListener('mousedown', this.handleDragStart);
-
-                        slide.addEventListener('touchstart', this.handleDragStart, { passive: true });
-
-                        slide.addEventListener('mouseup', this.handleDragEnd);
-
-                        slide.addEventListener('mouseleave', this.handleDragEnd);
-
-                        slide.addEventListener('touchend', this.handleDragEnd, { passive: true });
-
-                        slide.addEventListener('mousemove', this.handleDrag);
-
-                        slide.addEventListener('touchmove', this.handleDrag, { passive: true });
-                    });
-
-                    window.addEventListener('resize', this.setPositionByIndex);
-                },
-
-                handleDragStart(event) {
-                    this.startPos = event.type === 'mousedown' ? event.clientX : event.touches[0].clientX;
-
-                    this.isDragging = true;
-
-                    this.animationID = requestAnimationFrame(this.animation);
-                },
-
-                handleDrag(event) {
-                    if (! this.isDragging) {
-                        return;
-                    }
-
-                    const currentPosition = event.type === 'mousemove' ? event.clientX : event.touches[0].clientX;
-
-                    this.currentTranslate = this.prevTranslate + currentPosition - this.startPos;
-                },
-
-                handleDragEnd(event) {
-                    clearInterval(this.autoPlayInterval);
-
-                    cancelAnimationFrame(this.animationID);
-
-                    this.isDragging = false;
-
-                    const movedBy = this.currentTranslate - this.prevTranslate;
-
-                    if (this.direction == 'ltr') {
-                        if (
-                            movedBy < -100
-                            && this.currentIndex < this.slides.length - 1
-                        ) {
-                            this.currentIndex += 1;
-                        }
-
-                        if (
-                            movedBy > 100
-                            && this.currentIndex > 0
-                        ) {
-                            this.currentIndex -= 1;
-                        }
-                    } else {
-                        if (
-                            movedBy > 100
-                            && this.currentIndex < this.slides.length - 1
-                        ) {
-                            if (Math.abs(this.currentIndex) != this.slides.length - 1) {
-                                this.currentIndex -= 1;
-                            }
-                        }
-
-                        if (
-                            movedBy < -100
-                            && this.currentIndex < 0
-                        ) {
-                            this.currentIndex += 1;
-                        }
-                    }
-
-                    this.setPositionByIndex();
-
-                    this.play();
-                },
-
-                animation() {
-                    this.setSliderPosition();
-
-                    if (this.isDragging) {
-                        requestAnimationFrame(this.animation);
-                    }
-                },
-
-                setPositionByIndex() {
-                    this.currentTranslate = this.currentIndex * -window.innerWidth;
-
-                    this.prevTranslate = this.currentTranslate;
-
-                    this.setSliderPosition();
-                },
-
-                setSliderPosition() {
-                    if (this.slider) {
-                        this.slider.style.transform = `translateX(${this.currentTranslate}px)`;
-                    }
-                },
-
-                visitLink(image) {
-                    if (image.link) {
-                        window.location.href = image.link;
-                    }
-                },
-
-                navigate(type) {
-                    clearInterval(this.autoPlayInterval);
-
-                    if (this.direction === 'rtl') {
-                        type === 'next' ? this.prev() : this.next();
-                    } else {
-                        type === 'next' ? this.next() : this.prev();
-                    }
-
-                    this.setPositionByIndex();
-
-                    this.play();
-                },
-
-                next() {
-                    this.currentIndex = (this.currentIndex + this.startFrom) % this.images.length;
-                },
-
-                prev() {
-                    this.currentIndex = this.direction == 'ltr'
-                        ? this.currentIndex > 0 ? this.currentIndex - 1 : 0
-                        : this.currentIndex < 0 ? this.currentIndex + 1 : 0;
-                },
-
-                navigateByPagination(index) {
-                    this.direction == 'rtl' ? index = -index : '';
-
-                    clearInterval(this.autoPlayInterval);
-
-                    this.currentIndex = index;
-
-                    this.setPositionByIndex();
-
-                    this.play();
-                },
-
-                play() {
-                    clearInterval(this.autoPlayInterval);
-
-                    this.autoPlayInterval = setInterval(() => {
-                        this.currentIndex = (this.currentIndex + this.startFrom) % this.images.length;
-
-                        this.setPositionByIndex();
-                    }, 5000);
-                },
-
-                cleanup() {
-                    // Clear intervals and animation frames
-                    clearInterval(this.autoPlayInterval);
-                    cancelAnimationFrame(this.animationID);
-
-                    // Remove event listeners
-                    if (this.slides) {
-                        this.slides.forEach(slide => {
-                            slide.removeEventListener('mousedown', this.handleDragStart);
-                            slide.removeEventListener('touchstart', this.handleDragStart);
-                            slide.removeEventListener('mouseup', this.handleDragEnd);
-                            slide.removeEventListener('mouseleave', this.handleDragEnd);
-                            slide.removeEventListener('touchend', this.handleDragEnd);
-                            slide.removeEventListener('mousemove', this.handleDrag);
-                            slide.removeEventListener('touchmove', this.handleDrag);
-                        });
-                    }
-
-                    window.removeEventListener('resize', this.setPositionByIndex);
-                },
-            },
-        });
-    </script>
-@endpushOnce
+    </section>
+@endif
