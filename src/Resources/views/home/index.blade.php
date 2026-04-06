@@ -27,42 +27,26 @@
     @endif
 @endpush
 
-@push('styles')
-    <style>
-        .beanspa-swiper .swiper-pagination-bullet {
-            width: 12px;
-            height: 12px;
-            border-radius: 9999px;
-            background: rgba(255, 255, 255, 0.55);
-            opacity: 1;
-            transition: all 0.25s ease;
-        }
-
-        .beanspa-swiper .swiper-pagination-bullet-active {
-            width: 32px;
-            background: #f0a793;
-        }
-    </style>
-@endpush
-
 <x-shop::layouts>
     <x-slot:title>
         {{ $channel->home_seo['meta_title'] ?? 'BeanSpa - Natural Wellness' }}
     </x-slot>
 
-    @php($policySectionRendered = false)
-    @php($aboutSectionRendered = false)
 
     @foreach ($customizations as $customization)
-        @php($data = $customization->options)
+        @php
+            $data = $customization->options;
+        @endphp
 
         @switch ($customization->type)
+
             @case ($customization::IMAGE_CAROUSEL)
                 <x-shop::carousel
                     :options="$data"
                     aria-label="{{ trans('shop::app.home.index.image-carousel') }}"
                 />
-                @break
+            @break
+
             @case ($customization::STATIC_CONTENT)
                 @if (! empty($data['css']))
                     @push ('styles')
@@ -76,7 +60,8 @@
                     {!! $data['html'] !!}
                 @endif
 
-                @break
+            @break
+
             @case ($customization::CATEGORY_CAROUSEL)
                 <x-shop::categories.carousel
                     :title="$data['title'] ?? ''"
@@ -85,7 +70,8 @@
                     aria-label="{{ trans('shop::app.home.index.categories-carousel') }}"
                 />
 
-                @break
+            @break
+
             @case ($customization::PRODUCT_CAROUSEL)
                 <x-shop::products.carousel
                     :title="$data['title'] ?? ''"
@@ -94,7 +80,9 @@
                     aria-label="{{ trans('shop::app.home.index.product-carousel') }}"
                 />
 
-                @break
+            @break
+
         @endswitch
     @endforeach
+
 </x-shop::layouts>
