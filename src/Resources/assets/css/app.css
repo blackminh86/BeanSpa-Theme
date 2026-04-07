@@ -39,6 +39,320 @@ img.lazy {
   visibility: hidden;
 }
 
+/* Standalone before/after sample test block */
+.beanspa-before-after-sample {
+    padding: 2.5rem 0;
+    background: #f2efea;
+}
+
+.beanspa-before-after-sample .container {
+    width: min(1280px, 100% - 2rem);
+    margin: 0 auto;
+}
+
+.beanspa-before-after-sample .ba-cards {
+    position: relative;
+    margin-inline: -20px;
+}
+
+.beanspa-before-after-sample .ba-card {
+    position: sticky;
+    top: 1.25rem;
+    padding-top: 20px;
+}
+
+.beanspa-before-after-sample .ba-card-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.45fr) minmax(0, 0.75fr);
+    gap: 1.25rem;
+    align-items: stretch;
+    border-radius: 1.25rem;
+    overflow: visible;
+    transition: transform 0.12s linear, filter 0.12s linear;
+    transform-origin: center top;
+    background: transparent;
+}
+
+.beanspa-before-after-sample .ba-card-image {
+    min-width: 0;
+    background: #ddd;
+    border-radius: 1.25rem;
+    overflow: hidden;
+    box-shadow: 0 20px 38px rgba(0, 0, 0, 0.12);
+}
+
+.beanspa-before-after-sample .ba-compare {
+    --ba-pos: 50%;
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    min-height: 380px;
+    user-select: none;
+    touch-action: pan-y;
+    cursor: ew-resize;
+}
+
+.beanspa-before-after-sample .ba-compare.is-dragging {
+    cursor: grabbing;
+}
+
+.beanspa-before-after-sample .ba-compare img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    pointer-events: none;
+}
+
+.beanspa-before-after-sample .ba-before,
+.beanspa-before-after-sample .ba-after {
+    position: absolute;
+    inset: 0;
+}
+
+.beanspa-before-after-sample .ba-before {
+    z-index: 2;
+    clip-path: inset(0 50% 0 0);
+}
+
+.beanspa-before-after-sample .ba-after {
+    z-index: 1;
+}
+
+.beanspa-before-after-sample .ba-label {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    z-index: 5;
+    border-radius: 999px;
+    padding: 0.45rem 0.85rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #fff;
+    background: #1b6060;
+}
+
+.beanspa-before-after-sample .ba-after .ba-label {
+    left: auto;
+    right: 1rem;
+}
+
+.beanspa-before-after-sample .ba-separator {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    left: 50%;
+    z-index: 3;
+    background: rgba(255, 255, 255, 0.6);
+    transform: translateX(-50%);
+}
+
+.beanspa-before-after-sample .ba-handle {
+    position: absolute;
+    width: 3.2rem;
+    height: 3.2rem;
+    left: 50%;
+    top: 50%;
+    z-index: 4;
+    border-radius: 999px;
+    transform: translate(-50%, -50%);
+    background: #1b6060;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.24);
+    cursor: ew-resize;
+    touch-action: none;
+}
+
+.beanspa-before-after-sample .ba-left-arrow,
+.beanspa-before-after-sample .ba-right-arrow {
+    position: absolute;
+    top: 50%;
+    width: 0;
+    height: 0;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    transform: translateY(-50%);
+}
+
+.beanspa-before-after-sample .ba-left-arrow {
+    left: 0.95rem;
+    border-right: 6px solid #fff;
+}
+
+.beanspa-before-after-sample .ba-right-arrow {
+    right: 0.95rem;
+    border-left: 6px solid #fff;
+}
+
+.beanspa-before-after-sample .ba-card-content {
+    padding: 1.65rem 1.5rem;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 1rem;
+    border-radius: 1.25rem;
+    box-shadow: 0 20px 38px rgba(0, 0, 0, 0.12);
+    position: relative;
+    z-index: 1;
+}
+
+/* Per-card colors */
+.beanspa-before-after-sample .ba-card:nth-child(1) .ba-card-content {
+    background: #d4857a;
+}
+
+.beanspa-before-after-sample .ba-card:nth-child(2) .ba-card-content {
+    background: #1b6060;
+}
+
+.beanspa-before-after-sample .ba-card:nth-child(3) .ba-card-content {
+    background: #e8a592;
+}
+
+.beanspa-before-after-sample .ba-card-icon {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.beanspa-before-after-sample .ba-card-icon img {
+    width: 3rem;
+    height: 3rem;
+    object-fit: contain;
+}
+
+.beanspa-before-after-sample .ba-card-icon span {
+    font-size: 3.5rem;
+    line-height: 1;
+    color: rgba(255, 255, 255, 0.2);
+    font-weight: 600;
+}
+
+.beanspa-before-after-sample .ba-card-title {
+    margin: 0;
+    color: #fff;
+    font-size: 1.6rem;
+    line-height: 1.25;
+}
+
+.beanspa-before-after-sample .ba-card-description {
+    margin: 0.75rem 0 0;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.beanspa-before-after-sample .ba-card-link {
+    display: inline-block;
+    margin-top: 1.25rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #fff;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    opacity: 0.9;
+    transition: opacity 0.2s ease;
+}
+
+.beanspa-before-after-sample .ba-card-link:hover {
+    opacity: 1;
+}
+
+@media (max-width: 992px) {
+    .beanspa-before-after-sample .ba-card {
+        position: relative;
+        top: auto;
+    }
+
+    .beanspa-before-after-sample .ba-card-inner {
+        grid-template-columns: 1fr;
+        gap: 0.85rem;
+    }
+
+    .beanspa-before-after-sample .ba-card-content {
+        transform: none;
+        border-radius: 0.6rem;
+        padding: 1.4rem 1.25rem 1.5rem;
+    }
+
+    .beanspa-before-after-sample .ba-card-image {
+        border-radius: 0.6rem;
+    }
+
+    .beanspa-before-after-sample .ba-compare {
+        min-height: 320px;
+        border-radius: 0.6rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .beanspa-before-after-sample {
+        overflow: hidden;
+        width: 100vw;
+        margin-left: calc(50% - 50vw);
+        margin-right: calc(50% - 50vw);
+        padding-inline: 0;
+    }
+
+    .beanspa-before-after-sample .container {
+        width: 100vw;
+    }
+
+    .beanspa-before-after-sample .ba-cards {
+        margin-inline: 0;
+    }
+
+    .beanspa-before-after-sample .ba-card {
+        padding-top: 14px;
+    }
+
+    .beanspa-before-after-sample .ba-card-inner {
+        width: calc(100vw - 0.9rem);
+        max-width: calc(100vw - 0.9rem);
+        margin-left: calc(50% - 50vw + 0.45rem);
+        gap: 0.65rem;
+    }
+
+    .beanspa-before-after-sample .ba-card-image,
+    .beanspa-before-after-sample .ba-card-content {
+        width: 100%;
+    }
+
+    .beanspa-before-after-sample .ba-compare {
+        min-height: 220px;
+        max-height: 220px;
+    }
+
+    .beanspa-before-after-sample .ba-card-content {
+        min-height: 180px;
+        padding: 1rem 0.95rem 1.05rem;
+    }
+
+    .beanspa-before-after-sample .ba-card-title {
+        font-size: 1.05rem;
+        line-height: 1.28;
+    }
+
+    .beanspa-before-after-sample .ba-card-description {
+        font-size: 0.88rem;
+        line-height: 1.45;
+        display: -webkit-box;
+        -webkit-line-clamp: 6;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .beanspa-before-after-sample .ba-card-link {
+        margin-top: 0.75rem;
+        font-size: 0.84rem;
+    }
+
+    .beanspa-before-after-sample .ba-card-icon span {
+        font-size: 2.6rem;
+    }
+}
+
 .beanspa-reveal-left {
     opacity: 0;
     transform: translate3d(32px, 0, 0);
@@ -185,7 +499,7 @@ img.lazy {
 
 .section_about .img-box10 {
     position: relative;
-    --about-image: url('/themes/beanspa/images/about/section-about-1.jpg');
+    --about-image: url('../images/about/section-about-1.jpg');
     display: grid;
     grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
     gap: 1.75rem;
@@ -531,6 +845,90 @@ img.lazy {
     line-height: 1.5;
 }
 
+.section_thong_ke {
+    padding: 0;
+    background: #f6f3ed;
+}
+
+.section_thong_ke .container {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.section_thong_ke .box_thongke {
+    padding: 3rem 0;
+}
+
+.section_thong_ke .thongke-grid {
+    width: min(1280px, 100% - 3.5rem);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    align-items: center;
+}
+
+.section_thong_ke .thongke-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.15rem;
+    padding: 0 1.25rem;
+}
+
+.section_thong_ke .thongke-item--divider {
+    border-left: 1px solid rgba(28, 22, 21, 0.12);
+}
+
+.section_thong_ke .thongke-icon {
+    width: 68px;
+    height: 62px;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 68px;
+}
+
+.section_thong_ke .thongke-icon::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: #e8a592;
+    clip-path: polygon(50% 0%, 100% 34%, 82% 100%, 18% 100%, 0% 34%);
+    transform: rotate(45deg);
+}
+
+.section_thong_ke .thongke-icon .thongke-icon-glyph {
+    position: relative;
+    z-index: 1;
+    font-size: 2rem;
+    line-height: 1;
+    color: #ffffff;
+}
+
+.section_thong_ke .thongke-content {
+    min-width: 0;
+}
+
+.section_thong_ke .thongke-num {
+    margin: 0;
+    color: #1b6060;
+    font-size: clamp(2.25rem, 2.2vw, 3.2rem);
+    line-height: 1;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.section_thong_ke .thongke-label {
+    margin: 0.5rem 0 0;
+    color: #2d2522;
+    font-size: clamp(0.92rem, 0.85vw, 1.2rem);
+    line-height: 1.25;
+    white-space: nowrap;
+}
+
 .section_services_v2 {
     position: relative;
     overflow: hidden;
@@ -619,7 +1017,7 @@ img.lazy {
     padding: 0.4rem;
     position: relative;
     background-color: #f4f1ec;
-    background-image: url('/themes/beanspa/images/service/team-pattern.png');
+    background-image: url('../images/service/team-pattern.png');
     background-repeat: repeat;
     background-size: 132px auto;
     background-position: center;
@@ -1097,9 +1495,17 @@ img.lazy {
     }
 
     .section_thong_ke .thongke-icon {
-        width: 32px;
-        height: 32px;
-        flex-basis: 32px;
+        width: 38px;
+        height: 34px;
+        flex-basis: 38px;
+    }
+
+    .section_thong_ke .thongke-icon::before {
+        clip-path: polygon(50% 0%, 100% 34%, 82% 100%, 18% 100%, 0% 34%);
+    }
+
+    .section_thong_ke .thongke-icon .thongke-icon-glyph {
+        font-size: 1.15rem;
     }
 
     .section_thong_ke .thongke-num {
@@ -1108,8 +1514,9 @@ img.lazy {
 
     .section_thong_ke .thongke-label {
         margin-top: 0.12rem;
-        font-size: 0.66rem;
+        font-size: 0.62rem;
         line-height: 1.3;
+        white-space: normal;
     }
 
     .section_services_v2 {

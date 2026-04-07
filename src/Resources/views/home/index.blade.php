@@ -85,4 +85,5 @@
         @endswitch
     @endforeach
 
+
 </x-shop::layouts>
