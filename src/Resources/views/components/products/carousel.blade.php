@@ -11,19 +11,22 @@
         type="text/x-template"
         id="v-products-carousel-template"
     >
-        <div
-            class="container mt-20 max-lg:px-8 max-md:mt-8 max-sm:mt-7 max-sm:!px-4"
+        <section
+            class="section-index beanspa-products-carousel-section"
             v-if="! isLoading && products.length"
         >
-            <div class="flex justify-between">
-                <h2 class="font-dmserif text-3xl max-md:text-2xl max-sm:text-xl">
+        <div
+            class="container beanspa-products-carousel mt-16 max-lg:px-8 max-md:mt-8 max-sm:mt-7 max-sm:!px-4"
+        >
+            <div class="beanspa-products-carousel__head flex items-end justify-between gap-6">
+                <h2 class="beanspa-products-carousel__title font-dmserif text-3xl max-md:text-2xl max-sm:text-xl">
                     @{{ title }}
                 </h2>
 
                 <div class="flex items-center justify-between gap-8">
                     <a
                         :href="navigationLink"
-                        class="hidden max-lg:flex"
+                        class="beanspa-products-carousel__viewall-link hidden max-lg:flex"
                         v-if="navigationLink"
                     >
                         <p class="items-center text-xl max-md:text-base max-sm:text-sm">
@@ -59,23 +62,28 @@
 
             <div
                 ref="swiperContainer"
-                class="flex gap-8 pb-2.5 [&>*]:flex-[0] mt-10 overflow-auto scroll-smooth scrollbar-hide max-md:gap-7 max-md:mt-5 max-sm:gap-4 max-md:pb-0 max-md:whitespace-nowrap"
+                class="beanspa-products-carousel__track flex gap-6 pb-2.5 [&>*]:flex-[0] mt-8 overflow-auto scroll-smooth scrollbar-hide max-md:gap-5 max-md:mt-5 max-sm:gap-4 max-md:pb-0 max-md:whitespace-nowrap"
+                @pointerdown="onTrackPointerDown"
+                @pointermove="onTrackPointerMove"
+                @pointerup="onTrackPointerUp"
+                @pointercancel="onTrackPointerUp"
             >
                 <x-shop::products.card
-                    class="min-w-[291px] max-md:h-fit max-md:min-w-56 max-sm:min-w-[192px]"
+                    class="beanspa-products-carousel__card min-w-[300px] max-md:h-fit max-md:min-w-[232px] max-sm:min-w-[186px]"
                     v-for="product in products"
                 />
             </div>
 
             <a
                 :href="navigationLink"
-                class="secondary-button mx-auto mt-5 block w-max rounded-2xl px-11 py-3 text-center text-base max-lg:mt-0 max-lg:hidden max-lg:py-3.5 max-md:rounded-lg"
+                class="beanspa-products-carousel__viewall secondary-button mx-auto mt-6 block w-max rounded-2xl px-11 py-3 text-center text-base max-lg:mt-0 max-lg:hidden max-lg:py-3.5 max-md:rounded-lg"
                 :aria-label="title"
                 v-if="navigationLink"
             >
                 @lang('shop::app.components.products.carousel.view-all')
             </a>
         </div>
+        </section>
 
         <!-- Product Card Listing -->
         <template v-if="isLoading">
@@ -102,6 +110,14 @@
                     offset: 323,
 
                     isScreenMax2xl: window.innerWidth <= 1440,
+
+                    activePointerId: null,
+
+                    dragStartX: 0,
+
+                    dragStartScrollLeft: 0,
+
+                    isDraggingTrack: false,
                 };
             },
 
@@ -150,6 +166,50 @@
                         // Scroll to the right
                         container.scrollLeft += this.offset;
                     }
+                },
+
+                onTrackPointerDown(event) {
+                    const container = this.$refs.swiperContainer;
+
+                    if (! container || event.pointerType === 'mouse' && event.button !== 0) {
+                        return;
+                    }
+
+                    this.activePointerId = event.pointerId;
+                    this.dragStartX = event.clientX;
+                    this.dragStartScrollLeft = container.scrollLeft;
+                    this.isDraggingTrack = true;
+
+                    container.setPointerCapture(event.pointerId);
+                    container.classList.add('is-dragging');
+                },
+
+                onTrackPointerMove(event) {
+                    const container = this.$refs.swiperContainer;
+
+                    if (! this.isDraggingTrack || ! container || event.pointerId !== this.activePointerId) {
+                        return;
+                    }
+
+                    const deltaX = event.clientX - this.dragStartX;
+
+                    container.scrollLeft = this.dragStartScrollLeft - deltaX;
+                },
+
+                onTrackPointerUp(event) {
+                    const container = this.$refs.swiperContainer;
+
+                    if (! container || event.pointerId !== this.activePointerId) {
+                        return;
+                    }
+
+                    if (container.hasPointerCapture(event.pointerId)) {
+                        container.releasePointerCapture(event.pointerId);
+                    }
+
+                    this.activePointerId = null;
+                    this.isDraggingTrack = false;
+                    container.classList.remove('is-dragging');
                 },
             },
         });

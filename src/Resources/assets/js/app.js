@@ -27,6 +27,7 @@ window.app = createApp({
         this.initBeanspaSliders();
         this.initBeanspaPolicySliders();
         this.initBeanspaServiceSliders();
+        this.initBeanspaFeedbackSlider();
         this.initThongKeCounters();
         this.initAboutSectionMotion();
         this.initScrollReveal();
@@ -366,6 +367,38 @@ window.app = createApp({
 
                 rebuildSlider();
                 mobileMediaQuery.addEventListener('change', rebuildSlider);
+            });
+        },
+
+        initBeanspaFeedbackSlider() {
+            const el = document.querySelector('.swiper_feedback');
+
+            if (! el || el.dataset.feedbackReady === 'true') {
+                return;
+            }
+
+            el.dataset.feedbackReady = 'true';
+
+            new Swiper(el, {
+                modules: [Pagination],
+                slidesPerView: 1,
+                spaceBetween: 12,
+                grabCursor: true,
+                loop: true,
+                pagination: {
+                    el: el.querySelector('.swiper-pagination'),
+                    clickable: true,
+                },
+                breakpoints: {
+                    600: {
+                        slidesPerView: 2,
+                        spaceBetween: 12,
+                    },
+                    992: {
+                        slidesPerView: 3,
+                        spaceBetween: 12,
+                    },
+                },
             });
         },
 
