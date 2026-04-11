@@ -218,8 +218,10 @@ window.app = createApp({
         initBeanspaServiceSliders() {
             const mobileMediaQuery = window.matchMedia('(max-width: 767px)');
 
-            document.querySelectorAll('.beanspa-services-swiper').forEach((slider) => {
+            document.querySelectorAll('.beanspa-services-swiper').forEach((slider, idx) => {
+                console.log('[Beanspa] Found .beanspa-services-swiper:', slider, 'index:', idx);
                 if (slider.dataset.serviceSliderReady === 'true') {
+                    console.log('[Beanspa] Slider already initialized, skip:', slider);
                     return;
                 }
 
@@ -229,7 +231,8 @@ window.app = createApp({
                 const wrapper = slider.querySelector('.swiper-wrapper');
                 const pagination = slider.querySelector('[data-service-pagination], .services-tabs__dots');
 
-                if (! wrapper || ! pagination) {
+                if (!wrapper || !pagination) {
+                    console.warn('[Beanspa] Missing wrapper or pagination:', { wrapper, pagination, slider });
                     return;
                 }
 
@@ -239,7 +242,7 @@ window.app = createApp({
                 let currentMode = null;
 
                 const triggerSectionReveal = () => {
-                    if (! section || ! section.classList.contains('is-inview')) {
+                    if (!section || !section.classList.contains('is-inview')) {
                         return;
                     }
 
@@ -276,6 +279,7 @@ window.app = createApp({
                     }
 
                     dots = Array.from(pagination.querySelectorAll('.services-tabs__dot'));
+                    console.log('[Beanspa] Rendered dots:', dots);
                 };
 
                 const buildSlides = (isMobile) => {
@@ -303,9 +307,11 @@ window.app = createApp({
 
                         slider.classList.remove('is-mobile-cards');
                     }
+                    console.log('[Beanspa] Built slides for', isMobile ? 'mobile' : 'desktop', 'mode:', wrapper.children);
                 };
 
                 const createSwiper = () => {
+                    console.log('[Beanspa] Creating Swiper instance for:', slider);
                     swiper = new Swiper(slider, {
                         speed: 700,
                         slidesPerView: 1,
@@ -318,9 +324,11 @@ window.app = createApp({
                         touchStartPreventDefault: false,
                         on: {
                             init(instance) {
+                                console.log('[Beanspa] Swiper initialized:', instance);
                                 syncDots(instance.activeIndex);
                             },
                             slideChange(instance) {
+                                console.log('[Beanspa] Swiper slide changed:', instance.activeIndex);
                                 syncDots(instance.activeIndex);
                             },
                         },
@@ -329,6 +337,7 @@ window.app = createApp({
 
                 const rebuildSlider = () => {
                     const nextMode = mobileMediaQuery.matches ? 'mobile' : 'desktop';
+                    console.log('[Beanspa] Rebuild slider, mode:', nextMode, 'currentMode:', currentMode);
 
                     if (currentMode === nextMode) {
                         return;
@@ -337,6 +346,7 @@ window.app = createApp({
                     currentMode = nextMode;
 
                     if (swiper) {
+                        console.log('[Beanspa] Destroying old Swiper instance');
                         swiper.destroy(true, true);
                         swiper = null;
                     }
@@ -349,7 +359,7 @@ window.app = createApp({
                 pagination.addEventListener('click', (event) => {
                     const dot = event.target.closest('.services-tabs__dot');
 
-                    if (! dot || ! swiper) {
+                    if (!dot || !swiper) {
                         return;
                     }
 
@@ -361,6 +371,7 @@ window.app = createApp({
                     const targetIndex = Number.isNaN(dataIndex) ? dotIndex : dataIndex;
 
                     if (targetIndex >= 0) {
+                        console.log('[Beanspa] Dot clicked, slide to:', targetIndex);
                         swiper.slideTo(targetIndex);
                     }
                 });

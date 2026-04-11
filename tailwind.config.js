@@ -100,9 +100,5 @@ module.exports = {
 
     plugins: [],
 
-    safelist: [
-        {
-            pattern: /icon-/,
-        }
-    ]
+
 };
