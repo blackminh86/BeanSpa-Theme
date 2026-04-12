@@ -1,3 +1,6 @@
+
+
+
 @props([
     'hasHeader'  => true,
     'hasFeature' => true,
@@ -66,15 +69,28 @@
             crossorigin
         />
 
-        <link
-            rel="preload" as="style"
-            href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap"
-        />
+         
+        @if (app()->getLocale() === 'vi')
 
-        <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap"
-        />
+            <link
+                rel="preload" as="style"
+                href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap&subset=vietnamese"
+            />
+            <link
+                rel="stylesheet"
+                href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap&subset=vietnamese"
+            />
+        @else
+            <link
+                rel="preload" as="style"
+                href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap"
+            />
+            <link
+                rel="stylesheet"
+                href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=DM+Serif+Display&display=swap"
+            />
+        @endif
+        
 
         @stack('styles')
 

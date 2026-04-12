@@ -18,7 +18,7 @@ module.exports = {
             },
 
             padding: {
-                DEFAULT: "90px",
+                DEFAULT: "100px",
             },
         },
 
@@ -67,6 +67,12 @@ module.exports = {
                 content: {
                     primary: "#000000",
                 },
+
+                text: {
+                    primary: "#222222",
+                    secondary: "#666666",
+                    accent: "#F0A793",
+                },
             },
 
             fontFamily: {
@@ -75,8 +81,24 @@ module.exports = {
                 bitter: ["Bitter", "serif"],
 
                 // Semantic font tokens.
-                body: ["Poppins", "sans-serif"],
-                heading: ["Bitter", "DM Serif Display", "serif"],
+                 body: [
+                    "Inter",
+                    "Roboto",
+                    "Arial",
+                    "Tahoma",
+                    "Helvetica Neue",
+                    "Helvetica",
+                    "sans-serif"
+                ],
+                heading: [
+                    "Lora",
+                    "Bitter",
+                    "DM Serif Display",
+                    "Roboto",
+                    "Arial",
+                    "Tahoma",
+                    "serif"
+                ],
             },
 
             spacing: {
@@ -95,6 +117,29 @@ module.exports = {
                 "beanspa-lg": "28px",
                 "beanspa-pill": "9999px",
             },
+
+            fontSize: {
+                'xs': '.75rem',
+                'sm': '.875rem',
+                'base': '1rem',
+                'lg': '1.125rem',
+                'xl': '1.25rem',
+                '2xl': '1.5rem',
+                '3xl': '1.875rem',
+                '4xl': '2.25rem',
+                '5xl': '3rem',
+            },
+            fontWeight: {
+                'regular': 400,
+                'medium': 500,
+                'bold': 700,
+            },
+            lineHeight: {
+                'tight': 1.1,
+                'normal': 1.5,
+                'loose': 1.75,
+            },
+
         }
     },
 
