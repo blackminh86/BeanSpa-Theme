@@ -1186,6 +1186,17 @@ return [
             'verify-email' => 'Verify your email account',
         ],
 
+        'sections'=>[
+            'blog' => [
+                'latest' => 'Latest News',
+                'title' => 'Beauty & Health Trends',
+                'desc' => 'Bringing you the latest information on beauty trends to help you stay healthy and beautiful from the inside out.',
+                'view-all' => 'View all',
+                'read-more' => 'Read more',
+                'by-author' => 'By: :author',
+                'published-at' => 'Published at: :date',
+            ],
+        ],
         'thanks-for-contact' => 'Thanks for contacting us with your comments and questions. We all respond to you very soon.',
     ],
 

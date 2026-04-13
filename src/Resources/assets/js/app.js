@@ -1,3 +1,4 @@
+import { initBeanspaCollapse } from "./beanspa-collapse";
 /**
  * This will track all the images and fonts for publishing.
  */
@@ -24,10 +25,13 @@ window.app = createApp({
 
     mounted() {
         this.lazyImages();
+        // Khởi tạo collapse cho các section có class beanspa-collapse
+        initBeanspaCollapse();
         this.initBeanspaSliders();
         this.initBeanspaPolicySliders();
         this.initBeanspaServiceSliders();
         this.initBeanspaFeedbackSlider();
+         this.initBeanspaBlogSlider(); 
         this.initThongKeCounters();
         this.initAboutSectionMotion();
         this.initScrollReveal();
@@ -410,6 +414,36 @@ window.app = createApp({
                         spaceBetween: 12,
                     },
                 },
+            });
+        },
+
+        initBeanspaBlogSlider() {
+            document.querySelectorAll('.beanspa-swiper[data-swiper="blogs"]').forEach((slider) => {
+                if (!slider || slider.dataset.feedbackReady === 'true') {
+                    return;
+                }
+                slider.dataset.feedbackReady = 'true';
+                new Swiper(slider, {
+                    modules: [Pagination],
+                    slidesPerView: 1,
+                    spaceBetween: 12,
+                    grabCursor: true,
+                    loop: true,
+                    pagination: {
+                        el: slider.querySelector('.swiper-pagination'),
+                        clickable: true,
+                    },
+                    breakpoints: {
+                        600: {
+                            slidesPerView: 2,
+                            spaceBetween: 12,
+                        },
+                        992: {
+                            slidesPerView: 3,
+                            spaceBetween: 12,
+                        },
+                    },
+                });
             });
         },
 

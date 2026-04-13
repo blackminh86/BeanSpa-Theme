@@ -1,8 +1,6 @@
 
 <section class="section-index section_blog">
-	{{-- DEBUG: Hiển thị dữ liệu $latestBlogs --}}
-	<pre style="background:#fff;color:#222;font-size:12px;max-width:100vw;overflow:auto;padding:8px 12px;border:1px solid #eee;">{{ var_export($latestBlogs, true) }}</pre>
-	<div class="container">
+	 <div class="container max-lg:px-8 max-md:mt-8 max-sm:mt-7 max-sm:!px-4">
 		<div class="section-title-blog" data-aos="fade-right">
 			<div class="sub_title">Tin tức mới nhất</div>
 			<h2>

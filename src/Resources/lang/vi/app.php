@@ -1186,6 +1186,19 @@ return [
             'verify-email' => 'Xác minh tài khoản email của bạn',
         ],
 
+
+        'sections'=>[
+            'blog' => [
+                'latest' => 'Tin tức mới nhất',
+                'title' => 'Xu Hướng Làm Đẹp & Chăm Sóc Sức Khỏe',
+                'desc' => 'Mang đến cho bạn những thông tin mới nhất về xu hướng làm đẹp giúp bạn luôn khỏe đẹp từ bên trong.',
+                'view-all' => 'Xem tất cả',
+                'read-more' => 'Xem chi tiết',
+                'by-author' => 'Đăng bởi: :author',
+                'published-at' => 'Ngày đăng: :date',
+            ],
+        ],
+
         'thanks-for-contact' => 'Cảm ơn bạn đã liên hệ. Chúng tôi sẽ phản hồi sớm nhất có thể.',
     ],
 

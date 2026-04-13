@@ -20,9 +20,9 @@
 @endphp
 
 @if ($images->isNotEmpty())
-    <section class="bg-white px-0 pb-8 pt-0 lg:pb-10 lg:pt-0">
-        <div class="mx-auto w-full px-5">
-            <div class="beanspa-swiper swiper relative w-full overflow-hidden rounded-[32px] bg-[#2d1c17] shadow-[0_14px_40px_rgba(48,28,18,0.15)] aspect-[3/2] sm:aspect-[16/9] lg:aspect-[21/9]">
+    <section class="section-index section-carousel">
+        <div class="container max-lg:px-8 max-md:mt-8 max-sm:mt-7 max-sm:!px-4">
+            <div class="beanspa-swiper swiper relative w-full overflow-hidden rounded-[20px] bg-[#2d1c17] shadow-[0_14px_40px_rgba(48,28,18,0.15)] aspect-[3/2] sm:aspect-[16/9] lg:aspect-[21/9]">
                 <div class="swiper-wrapper h-full">
                     @foreach ($images as $index => $image)
                         @php

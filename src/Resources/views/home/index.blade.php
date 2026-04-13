@@ -85,5 +85,6 @@
         @endswitch
     @endforeach
 
-
+    <x-shop::blogs />
+    
 </x-shop::layouts>

@@ -19,7 +19,7 @@
             class="container beanspa-products-carousel mt-16 max-lg:px-8 max-md:mt-8 max-sm:mt-7 max-sm:!px-4"
         >
             <div class="beanspa-products-carousel__head flex items-end justify-between gap-6">
-                <h2 class="beanspa-products-carousel__title font-dmserif text-3xl max-md:text-2xl max-sm:text-xl">
+                <h2 class="text-3xl max-md:text-2xl max-sm:text-xl">
                     @{{ title }}
                 </h2>
 
